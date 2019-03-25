@@ -9,12 +9,15 @@ import models.TextureModel;
 import models.rawModel;
 import rendergame.Loader;
 import rendergame.ModelTexture;
+import rendergame.OBJLoader;
 import rendergame.renderer;
 import rendergame.staticShader;
 import rendergame.w;
 
 public class main {
-
+	
+	
+	
 	public static void main(String[] args) {
 		w.createDisplay();
 		Loader loader = new Loader(); 
@@ -24,30 +27,15 @@ public class main {
 		renderer renderer = new renderer(shader); 
 		
 		
-		float[] vertices = {
-			    -0.5f, 0.5f, 0,
-			    -0.5f, -0.5f, 0,
-			    0.5f, -0.5f, 0,
-			    0.5f, 0.5f, 0,
-			    //0.5f, 0.5f, 0f,
-			    //-0.5f, 0.5f, 0f
-			  };
-		
-		int[] indices = {
-			0,1,3,
-			3,1,2
-		};
-		
-		float[] textureCoords = {
-			0,0,
-			0,1,
-			1,1,
-			1,0
-		};
-		rawModel model = loader.loadToVAO(vertices,textureCoords, indices);
-		ModelTexture texture = new ModelTexture(loader.loadTexture("container"));
+		rawModel model = OBJLoader.loadObjModel("dragon", loader);
+				
+				
+		ModelTexture texture = new ModelTexture(loader.loadTexture("stallTexture"));
 		TextureModel texturedModel = new TextureModel(model,texture);
-		Entity entity = new Entity(texturedModel, new Vector3f(0,0,-1),0,0,0,1);
+		Entity entity = new Entity(texturedModel, new Vector3f(0,0,-50),0,0,0,1, 1);
+		//Entity entity1 = new Entity(texturedModel, new Vector3f(2,0,-5), 0,0,0,1,2);
+		//Entity entity2 = new Entity(texturedModel, new Vector3f(-2,0,-5), 0,0,0,1,-1);
+		
 		
 		Camera camera = new Camera();
 		
@@ -58,13 +46,15 @@ public class main {
 			
 			entity.increasePosition(0, 0, 0);
 			camera.move();
-			//entity.increaseRotation(0, 1.2f, 0);
+			entity.increaseRotation(0, 1.2f, 0);
 			
 			
 			renderer.prepare();
 			shader.start();
 			shader.loadViewMatrix(camera);
+			//renderer.render(entity1, shader);
 			renderer.render(entity, shader);
+			//renderer.render(entity2, shader);
 			shader.stop();
 			//Game loop 
 			//render game
@@ -76,5 +66,5 @@ public class main {
 		loader.cleanUp();
 		w.closeDisplay();
 	}
-
+	
 }
