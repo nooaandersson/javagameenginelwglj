@@ -48,8 +48,8 @@ public class OBJLoader {
 					Vector3f normal = new Vector3f(Float.parseFloat(currentLine[1]), Float.parseFloat(currentLine[2]), Float.parseFloat(currentLine[3]));
 					normals.add(normal);
 				} else if (line.startsWith("f ")) {
-					textureArray = new float[vertices.size()*2];
-					normalsArray = new float[vertices.size()*3];
+					textureArray = new float[vertices.size() * 2];
+					normalsArray = new float[vertices.size() * 3];
 					break;
 				}
 				
@@ -89,22 +89,22 @@ public class OBJLoader {
 		for(int i=0; i<indices.size();i++) {
 			indicesArray[i] = indices.get(i);
 		}
-		return loader.loadToVAO(verticesArray, textureArray, indicesArray);
+		return loader.loadToVAO(verticesArray, textureArray,normalsArray, indicesArray);
 		
 		
 		
 		
 	}
-	private static void processVertex(String[] vertexData, List<Integer> indices, List<Vector2f> textures, List<Vector3f> normals,float[] textureArray, float[] normalArray ) {
+	private static void processVertex(String[] vertexData, List<Integer> indices, List<Vector2f> textures, List<Vector3f> normals,float[] textureArray, float[] normalsArray ) {
 		int currentVertexPointer = Integer.parseInt(vertexData[0]) - 1;
 		indices.add(currentVertexPointer); 
 		Vector2f currentTex = textures.get(Integer.parseInt(vertexData[1])-1); 
 		textureArray[currentVertexPointer*2] = currentTex.x;
 		textureArray[currentVertexPointer*2+1] = 1 - currentTex.y;
 		Vector3f currentNorm = normals.get(Integer.parseInt(vertexData[2])-1); 
-		normalArray[currentVertexPointer*3] = currentNorm.x; 
-		normalArray[currentVertexPointer*3+1] = currentNorm.y; 
-		normalArray[currentVertexPointer*3+2] = currentNorm.z; 
+		normalsArray[currentVertexPointer*3] = currentNorm.x; 
+		normalsArray[currentVertexPointer*3+1] = currentNorm.y; 
+		normalsArray[currentVertexPointer*3+2] = currentNorm.z; 
 
 	}
 	
