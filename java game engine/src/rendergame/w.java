@@ -12,7 +12,7 @@ public class w {
 	
 	private static final int WIDTH = 1280; 
 	private static final int HEIGHT = 720;
-	private static final int FPS_CAP = 120;
+	private static final int FPS_CAP = 1000;
 	
 	
 	
@@ -36,6 +36,7 @@ public class w {
 	public static void updateDisplay() {
 		Display.sync(FPS_CAP);
 		Display.update(); 
+		
 	}
 	
 }
