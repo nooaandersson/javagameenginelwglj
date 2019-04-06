@@ -9,6 +9,7 @@ import org.lwjgl.util.vector.Vector3f;
 
 import entities.Camera;
 import entities.Entity;
+import entities.Player;
 import models.TextureModel;
 import models.rawModel;
 import rendergame.Light;
@@ -63,14 +64,14 @@ public class main {
 		//Entity entity2 = new Entity(texturedModel, new Vector3f(-2,0,-5), 0,0,0,1,-1);
 		
 		
-		Camera camera = new Camera();
+		Camera camera = new Camera(1f,1f,0);
 		Light light = new Light(new Vector3f(30,2000,30), new Vector3f(1,1,1));
 		
 		List<Entity> alldrag = new ArrayList<Entity>();
 		Random random = new Random();
 		
 		
-		for(int i = 0; i < 10000; i++) {
+		for(int i = 0; i < 1000; i++) {
 			float x = random.nextFloat() * -100 + 50;
 			float y = random.nextFloat();
 			float z = random.nextFloat() * 300;
@@ -78,13 +79,22 @@ public class main {
 			
 		}
 		
-		Terrain terrain = new Terrain(0,0,loader,new ModelTexture(loader.loadTexture("grass")));
-		Terrain terrain3 = new Terrain(2,0,loader,new ModelTexture(loader.loadTexture("grass")));
-		Terrain terrain4 = new Terrain(-2,0,loader,new ModelTexture(loader.loadTexture("grass")));
-		Terrain terrain5 = new Terrain(-1,0,loader,new ModelTexture(loader.loadTexture("grass")));
-		Terrain terrain2 = new Terrain(1,0,loader,new ModelTexture(loader.loadTexture("grass")));
+//		Terrain terrain = new Terrain(0,0,loader,new ModelTexture(loader.loadTexture("grass")));
+//		Terrain terrain3 = new Terrain(2,0,loader,new ModelTexture(loader.loadTexture("grass")));
+//		Terrain terrain4 = new Terrain(-2,0,loader,new ModelTexture(loader.loadTexture("grass")));
+//		Terrain terrain5 = new Terrain(-1,0,loader,new ModelTexture(loader.loadTexture("grass")));
+//		Terrain terrain2 = new Terrain(1,0,loader,new ModelTexture(loader.loadTexture("grass")));
+//		
+		Terrain terrian = new Terrain(0,0, loader, new ModelTexture(loader.loadTexture("n")));
+		Player player = new Player(staticModel1, new Vector3f(0,4,30),0,0,0,1);
 		while(!Display.isCloseRequested()) {
 			
+//			for(int i = 0; i < 2; i++) {
+//				Terrain terrain = new Terrain(random.nextInt(),random.nextInt(),loader, new ModelTexture(loader.loadTexture("grass")));
+//				renderer.processTerrain(terrain);
+//				
+//			}
+			renderer.processTerrain(terrian);
 			
 			
 			//game logic
@@ -94,21 +104,22 @@ public class main {
 			camera.move();
 			//entity.increaseRotation(0, 1.2f, 0);
 			renderer.render(light, camera);
-		
+			player.move();
+			renderer.processEntity(player);
 			//renderer.render(ent, shader);
 			//renderer.render(entity1, shader);
 			//renderer.render(entity, shader);
 			//renderer.render(entity1, shader);
 			//renderer.render(entity2, shader);
-			//for(Entity cude : alldrag) {
-				//renderer.processEntity(cude);
+			for(Entity cude : alldrag) {
+				renderer.processEntity(cude);
 				//cude.increaseRotation(0, 1.2f, 0);
-			//}
-			renderer.processTerrain(terrain);
-			renderer.processTerrain(terrain2);
-			renderer.processTerrain(terrain3);
-			renderer.processTerrain(terrain4);
-			renderer.processTerrain(terrain5);
+			}
+			//renderer.processTerrain(terrain);
+			//renderer.processTerrain(terrain2);
+			//renderer.processTerrain(terrain3);
+			//renderer.processTerrain(terrain4);
+			//renderer.processTerrain(terrain5);
 			
 			
 			//Game loop 
