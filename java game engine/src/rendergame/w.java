@@ -11,8 +11,8 @@ import org.lwjgl.opengl.Display;
 
 public class w {
 	
-	private static final int WIDTH = 1280; 
-	private static final int HEIGHT = 720;
+	private static final int WIDTH = 1920; 
+	private static final int HEIGHT = 1080;
 	private static final int FPS_CAP = 1000;
 	
 	

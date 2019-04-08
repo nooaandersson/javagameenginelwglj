@@ -63,9 +63,9 @@ public class main {
 		//Entity entity1 = new Entity(texturedModel, new Vector3f(2,0,-5), 0,0,0,1,2);
 		//Entity entity2 = new Entity(texturedModel, new Vector3f(-2,0,-5), 0,0,0,1,-1);
 		
-		
-		Camera camera = new Camera(1f,1f,0);
-		Light light = new Light(new Vector3f(30,2000,30), new Vector3f(1,1,1));
+		Player player = new Player(staticModel, new Vector3f(0,0,0),0,0,0,1);
+		Camera camera = new Camera(player);
+		Light light = new Light(new Vector3f(0,100,2), new Vector3f(1,1,1));
 		
 		List<Entity> alldrag = new ArrayList<Entity>();
 		Random random = new Random();
@@ -85,8 +85,9 @@ public class main {
 //		Terrain terrain5 = new Terrain(-1,0,loader,new ModelTexture(loader.loadTexture("grass")));
 //		Terrain terrain2 = new Terrain(1,0,loader,new ModelTexture(loader.loadTexture("grass")));
 //		
-		Terrain terrian = new Terrain(0,0, loader, new ModelTexture(loader.loadTexture("n")));
-		Player player = new Player(staticModel1, new Vector3f(0,4,30),0,0,0,1);
+		Terrain terrian = new Terrain(0,0, loader, new ModelTexture(loader.loadTexture("n")), "heightMap");
+		Terrain terrian1 = new Terrain(-1,0,loader, new ModelTexture(loader.loadTexture("grass")), "heightMap");
+		
 		while(!Display.isCloseRequested()) {
 			
 //			for(int i = 0; i < 2; i++) {
@@ -95,6 +96,7 @@ public class main {
 //				
 //			}
 			renderer.processTerrain(terrian);
+			renderer.processTerrain(terrian1);
 			
 			
 			//game logic
@@ -104,8 +106,10 @@ public class main {
 			camera.move();
 			//entity.increaseRotation(0, 1.2f, 0);
 			renderer.render(light, camera);
-			player.move();
+			player.move(terrian);
+			player.move(terrian1);
 			renderer.processEntity(player);
+			
 			//renderer.render(ent, shader);
 			//renderer.render(entity1, shader);
 			//renderer.render(entity, shader);
