@@ -13,13 +13,15 @@ public class w {
 	
 	private static final int WIDTH = 1920; 
 	private static final int HEIGHT = 1080;
-	private static final int FPS_CAP = 1000;
-	
-	
+	private static final int FPS_CAP = 100;
 	
 	private static long lastFrameTime;
 	private static float delta;
 	
+	
+	public static void frame() {
+		System.out.print((int)delta);
+	}
 	
 	public static void createDisplay() {
 		ContextAttribs attribs = new ContextAttribs(3,2);
@@ -34,6 +36,7 @@ public class w {
 		}
 		GL11.glViewport(0, 0, WIDTH, HEIGHT);
 		lastFrameTime = getCurrentTime();
+	
 	}
 	public static void closeDisplay() {
 		Display.destroy();
@@ -45,6 +48,7 @@ public class w {
 		long currentFrameTime = getCurrentTime();
 		delta = (currentFrameTime - lastFrameTime)/1000f;
 		lastFrameTime = currentFrameTime;
+		///System.out.print(delta);
 		
 	}
 	public static long getCurrentTime() {
@@ -52,6 +56,9 @@ public class w {
 	}
 	public static float getFrameTimeSeconds() {
 		return delta;
+	}
+	public static void updateDisplayonce() {
+		
 	}
 	
 	

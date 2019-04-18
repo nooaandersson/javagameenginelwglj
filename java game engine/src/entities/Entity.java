@@ -1,8 +1,11 @@
 package entities;
 
+import org.lwjgl.input.Keyboard;
 import org.lwjgl.util.vector.Vector3f;
 
 import models.TextureModel;
+import rendergame.renderer;
+import rendergame.MasterRenderer;
 
 public class Entity {
 	private TextureModel model; 
@@ -32,7 +35,6 @@ public class Entity {
 		this.rotY+=dy;
 		this.rotZ+=dz;
 	}
-	
 	
 	
 	public TextureModel getModel() {

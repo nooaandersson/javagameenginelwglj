@@ -156,13 +156,22 @@ public class Camera {
 		if(Mouse.isButtonDown(1)) {
 			float pitchChange = Mouse.getDY() * 0.1f;
 			pitch -= pitchChange;
+			
 		}
 	}
 	
 	private void calculateAngelAroundPlayer() {
-		if(Mouse.isButtonDown(0)) {
-			float angleChange = Mouse.getDX() * 0.3f;
-			angleAroundPlayer -= angleChange;
+		
+		if(Mouse.isInsideWindow()) {
+			if(Mouse.isButtonDown(0)) {
+				float angleChange = Mouse.getDX() * 3f;
+				angleAroundPlayer -= angleChange;
+				System.out.print(angleChange);
+			}
+			else if(!Mouse.isButtonDown(0)){
+				float angleChange = Mouse.getDX();
+				angleAroundPlayer = angleChange;
+			}
 		}
 	}
 }

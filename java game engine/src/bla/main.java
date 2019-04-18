@@ -4,12 +4,14 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
 
+import org.lwjgl.input.Keyboard;
 import org.lwjgl.opengl.Display;
 import org.lwjgl.util.vector.Vector3f;
 
 import entities.Camera;
 import entities.Entity;
 import entities.Player;
+import entities.SomeStuff;
 import models.TextureModel;
 import models.rawModel;
 import rendergame.Light;
@@ -17,19 +19,21 @@ import rendergame.Loader;
 import rendergame.MasterRenderer;
 import rendergame.ModelTexture;
 import rendergame.OBJLoader;
+import rendergame.renderer;
 import rendergame.staticShader;
 import rendergame.w;
 import terrains.Terrain;
+import java.awt.event.KeyListener;
+import java.awt.event.KeyEvent;;
 
 public class main {
-	
-	
 	
 	public static void main(String[] args) {
 		
 		
 		w.createDisplay();
 		Loader loader = new Loader(); 
+		
 		
 
 		staticShader shader = new staticShader();
@@ -48,6 +52,7 @@ public class main {
 		
 		Entity entity = new Entity(staticModel, new Vector3f(0,0,-25),0,0,0,1 );
 		Entity entity1 = new Entity(staticModel1, new Vector3f(20,0,-25),0,100,0,5);
+		
 		
 		
 		//other render
@@ -87,50 +92,34 @@ public class main {
 //		
 		Terrain terrian = new Terrain(0,0, loader, new ModelTexture(loader.loadTexture("n")), "heightMap");
 		Terrain terrian1 = new Terrain(-1,0,loader, new ModelTexture(loader.loadTexture("grass")), "heightMap");
+		Terrain terrian2 = new Terrain(0,-1, loader, new ModelTexture(loader.loadTexture("n")), "heightMap");
+		Terrain terrian3 = new Terrain(-1,-1,loader, new ModelTexture(loader.loadTexture("grass")), "heightMap");
+		SomeStuff spawner = new SomeStuff(staticModel, new Vector3f(0,0,0),0,0,0,10);		
+		
 		
 		while(!Display.isCloseRequested()) {
+ 
+			w.updateDisplay();
+			renderer.processEntity(spawner);
+			spawner.Spawner();
 			
-//			for(int i = 0; i < 2; i++) {
-//				Terrain terrain = new Terrain(random.nextInt(),random.nextInt(),loader, new ModelTexture(loader.loadTexture("grass")));
-//				renderer.processTerrain(terrain);
-//				
-//			}
+			renderer.processTerrain(terrian3);
+			renderer.processTerrain(terrian2);
 			renderer.processTerrain(terrian);
 			renderer.processTerrain(terrian1);
-			
-			
-			//game logic
-			
-			//entity.increasePosition(0, 0, 0);
-			//ent.increasePosition(0, 0, 0);
-			camera.move();
-			//entity.increaseRotation(0, 1.2f, 0);
+			w.frame();			
 			renderer.render(light, camera);
+			renderer.processEntity(player);
+	//		for(Entity cude : alldrag) {
+	//			renderer.processEntity(cude);
+	//		}
+			camera.move();
 			player.move(terrian);
 			player.move(terrian1);
-			renderer.processEntity(player);
-			
-			//renderer.render(ent, shader);
-			//renderer.render(entity1, shader);
-			//renderer.render(entity, shader);
-			//renderer.render(entity1, shader);
-			//renderer.render(entity2, shader);
-			for(Entity cude : alldrag) {
-				renderer.processEntity(cude);
-				//cude.increaseRotation(0, 1.2f, 0);
-			}
-			//renderer.processTerrain(terrain);
-			//renderer.processTerrain(terrain2);
-			//renderer.processTerrain(terrain3);
-			//renderer.processTerrain(terrain4);
-			//renderer.processTerrain(terrain5);
-			
-			
-			//Game loop 
-			//render game
-			
-			w.updateDisplay();
+			player.move(terrian3);
+			player.move(terrian2);
 		}
+		
 		
 		shader.cleanUp();
 		loader.cleanUp();
