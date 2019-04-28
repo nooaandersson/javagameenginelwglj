@@ -58,41 +58,42 @@ public class Camera {
 		
 		this.yaw = 180 - (player.getRotY() + angleAroundPlayer);
 		
-		
-//		if(Keyboard.isKeyDown(Keyboard.KEY_Y)) {
-//			position.z-=0.04f;
-//		}
-//		if(Keyboard.isKeyDown(Keyboard.KEY_J)) {
-//			position.x+=0.04f;
-//		}
-//		if(Keyboard.isKeyDown(Keyboard.KEY_G)) {
-//			position.x-=0.04f;		
-//		}
-//		if(Keyboard.isKeyDown(Keyboard.KEY_H)) {
-//			position.z+=0.04f;
-//		}
-//		if(Keyboard.isKeyDown(Keyboard.KEY_DOWN)) {
-//			position.y-=0.04f;
-//		}
-//		if(Keyboard.isKeyDown(Keyboard.KEY_UP)) {			
-//			position.y+=0.04f;
-//		}
-//		if(Keyboard.isKeyDown(Keyboard.KEY_9)) {
-//			position.z-=0.4f;
-//			
-//		}
-//		if(Keyboard.isKeyDown(Keyboard.KEY_0)) {
-//			camera_rot += Mouse.getX();			
-//		}
-//		if(Mouse.isInsideWindow()) {
-//			tt = position.x;
-//			tty = position.y;
-//			ttz = position.z;
-//			System.out.println("x" + tt);
-//			System.out.println("y" + tty);
-//			System.out.println("z" + ttz);
-//		}
-		
+		if(Keyboard.isKeyDown(Keyboard.KEY_4)) {
+		if(Keyboard.isKeyDown(Keyboard.KEY_Y)) {
+			position.z-=0.04f;
+		}
+		if(Keyboard.isKeyDown(Keyboard.KEY_J)) {
+			position.x+=0.04f;
+		}
+		if(Keyboard.isKeyDown(Keyboard.KEY_G)) {
+			position.x-=0.04f;		
+		}
+		if(Keyboard.isKeyDown(Keyboard.KEY_H)) {
+			position.z+=0.04f;
+			
+		}
+		if(Keyboard.isKeyDown(Keyboard.KEY_DOWN)) {
+			position.y-=0.04f;
+		}
+		if(Keyboard.isKeyDown(Keyboard.KEY_UP)) {			
+			position.y+=0.04f;
+		}
+		if(Keyboard.isKeyDown(Keyboard.KEY_9)) {
+			position.z-=0.4f;
+			
+		}
+		if(Keyboard.isKeyDown(Keyboard.KEY_0)) {
+			camera_rot += Mouse.getX();			
+		}
+		if(Mouse.isInsideWindow()) {
+			tt = position.x;
+			tty = position.y;
+			ttz = position.z;
+			System.out.println("x" + tt);
+			System.out.println("y" + tty);
+			System.out.println("z" + ttz);
+		}
+		}
 		
 		
 		
@@ -169,8 +170,8 @@ public class Camera {
 				System.out.print(angleChange);
 			}
 			else if(!Mouse.isButtonDown(0)){
-				float angleChange = Mouse.getDX();
-				angleAroundPlayer = angleChange;
+//				float angleChange = Mouse.getDX();
+//				angleAroundPlayer = angleChange;
 			}
 		}
 	}

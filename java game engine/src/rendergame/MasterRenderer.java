@@ -44,6 +44,10 @@ public class MasterRenderer {
 		terrainRenderer = new TerrainRenderer(terrainShader,projectionMatrix);
 	}
 	
+	public Matrix4f getProjectionMatrix() {
+		return projectionMatrix;
+	}
+	
 	public void render(Light sun,Camera camera){
 	    
 	    

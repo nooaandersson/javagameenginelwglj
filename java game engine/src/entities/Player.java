@@ -22,6 +22,9 @@ public class Player extends Entity {
 	private float dy = 0;
 	private float speed = 0.02f;
 	private boolean InAir = false;
+	private Player player;
+	private Vector3f position =  new Vector3f(0,0,0);
+	
 	
 	private static final float TERRAIN_HEIGHT = 0;
 	
@@ -71,8 +74,9 @@ public class Player extends Entity {
 		}else {
 			this.currentTurnSpeed = 0;
 		}
-		if(Keyboard.isKeyDown(Keyboard.KEY_P) ) {
+		if(Keyboard.isKeyDown(Keyboard.KEY_P)) {
 			this.dy = speed;
+			
 		}
 		else if(Keyboard.isKeyDown(Keyboard.KEY_L)) {
 			this.dy = -speed;
